@@ -37,7 +37,7 @@ def prepper(tag):
             result=[]
             for l in twt :
                 if l not in stop_words and len(l)>2:# and d.check(l):
-                    l = lemmatizer.lemmatize(l)
+                    l = lemmatizer.lemmatize(l,'v')
                     f.write((l+'\n'))
             count+=1
 

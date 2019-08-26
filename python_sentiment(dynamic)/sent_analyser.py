@@ -17,8 +17,11 @@ import preprocessor
 import vadersentiment
 import wcloud
 
+start_time=time.time()
 hashtag=input("Please enter the topic you want to search for: ")
 twint_demo.scraper(hashtag)
 preprocessor.prepper(hashtag)
-vadersentiment.vader_sent(hashtag)
-wcloud.cloud(hashtag)
+comp1,neg1,pos1,neu1 = vadersentiment.vader_sent(hashtag)
+# print(comp1,neg1,pos1,neu1)
+wcloud.cloud(hashtag,comp1,neg1,pos1,neu1)
+print("The total execution time is:{}".format(time.time()-start_time))

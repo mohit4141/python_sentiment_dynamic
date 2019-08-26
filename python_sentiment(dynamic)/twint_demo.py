@@ -6,7 +6,7 @@ def scraper(tag):
     c = twint.Config()
     # c.Username = " "
     c.Search = '#{}'.format(tag)
-    c.Limit = 200
+    c.Limit = 100
     # c.Since = "2019-08-06"
     c.Format = "Tweet id: {id} | Tweet: {tweet}"
     c.Store_object = True

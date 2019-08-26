@@ -13,6 +13,7 @@ def vader_sent(tag):
     comp=0
     pos=0
     neg=0
+    neu=0
 
 
     with open('twitter{}/tweets.csv'.format(tag),'r',encoding='utf8') as file:
@@ -23,6 +24,13 @@ def vader_sent(tag):
             score = sid.polarity_scores(line)
             # print(type(score))
             comp+=score['compound']
+            if score['compound']>=0.05:
+                pos+=1
+            elif score['compound']<-0.05:
+                neg+=1
+            else:
+                neu+=1
+
             # print("{:-<40} {}".format(line, str(score)))
             # print(str(result))
 
@@ -35,6 +43,10 @@ def vader_sent(tag):
         # f.close()
     # sentiment=''
     comp/=count
+    # neg/=count
+    # pos/=count
+    # neu/=count
+
     if(comp>=0.05):    
         print("The overall sentiment of the topic is POSITIVE with a compound value of: ",comp)
     elif(comp>-0.05 and comp<0.05):
@@ -42,3 +54,5 @@ def vader_sent(tag):
     else:
         print("The overall sentiment of the topic is NEGATIVE with a compound value of: ",comp)
     print("The execution time is: {} seconds ".format(time.time()-start_time))
+
+    return comp,neg,pos,neu
